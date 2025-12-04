@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>susu-前端开发工程师简历</title>
+    <link rel="stylesheet" href="styles.css">
+    <link 
+        rel="icon" 
+        type="image/svg+xml" 
+        href="data:image/svg+xml,<svg t='1764727405480' class='icon' viewBox='0 0 1024 1024' version='1.1' xmlns='http://www.w3.org/2000/svg' p-id='6714' width='200' height='200'><path d='M234.666667 42.666667a42.666667 42.666667 0 0 0-42.24 48.64l60.458666 426.666666a42.666667 42.666667 0 0 0 42.24 36.693334H469.333333v384a42.666667 42.666667 0 1 0 85.333334 0v-384h174.208a42.666667 42.666667 0 0 0 42.24-36.693334l60.458666-426.666666A42.666667 42.666667 0 0 0 789.333333 42.666667h-554.666666zM512 469.333333H332.16L283.818667 128h456.362666l-48.341333 341.333333H512z m-21.333333-234.666666a42.666667 42.666667 0 1 0-85.333334 0v128a42.666667 42.666667 0 0 0 85.333334 0v-128z m85.333333-42.666667a42.666667 42.666667 0 0 1 42.666667 42.666667v128a42.666667 42.666667 0 1 1-85.333334 0v-128a42.666667 42.666667 0 0 1 42.666667-42.666667z' fill='%230A0F40' p-id='6715'></path></svg>"
+    >
+    <link rel="stylesheet" href="font_6xjnxypic9k/iconfont.css">
+</head>
+<body>
+    <div class="container">
+        <header>
+            <div class="header-left">
+                <span class="iconfont icon-ren"></span>
+                <div class="header-left-content">
+                    <h1>苏新皓</h1>
+                    <h2>前端开发工程师</h2>
+                </div>
+            </div>
+            <div class="header-right">
+                <div class="image-email">📧</div>
+                <p>email@example.com</p>
+                <div class="image-phone">☎️</div>
+                <p>138-8888-8888</p>
+                <div class="image-address">📍</div>
+                <p>上海市浦东新区</p>
+            </div>
+        </header>
+        <div class="main-container">
+            <div class="main-left-container">
+                    <div class="education">
+                        
+                        <h2 class="edu-background">教育背景</h2>
+                        <h3 class="college">XX大学 - 计算机科学与技术</h3>
+                        <p class="master"><strong>硕士 | 2023 - 2026</strong></p>
+                        <p class="course">主修课程: Web前端开发、数据结构与算法、人机交互设计</p>
+                        <h3 class="college">XX大学 - 软件工程</h3>
+                        <p class="master"><strong>学士 | 2019 - 2023</strong></p>
+                        <p class="course">主修课程: JavaScript高级程序设计、响应式网页设计、数据库系统</p>
+                    </div>
+                    <div class="skills">
+                        <h2 class="edu-background">专业技能</h2>
+                        <div class="blank"></div>
+                        <span class="skill">HTML5 & CSS3HTML5 & CSS3</span>
+                        <span class="skill">JavaScript (ES6+)</span>
+                        <span class="skill">Vue.js</span>
+                        <span class="skill">响应式设计</span>
+                        <span class="skill">Git版本控制</span>
+                        <span class="skill">Node.js基础</span>
+                        <span class="skill">UI/UX设计</span>
+                        <span class="skill">性能优化</span>
+                    </div>
+                    <div class="experience">
+                        <h2 class="edu-background">项目经验</h2>
+                        <h3 class="college">电商平台前端开发</h3>
+                        <p class="master"><strong>2025.03 - 2025.06</strong></p>
+                        <p class="course">使用Vue.js开发响应式电商平, 实现商品展示、购物车和结算功能。</p>
+                        <h3 class="college">企业官网重构</h3>
+                        <p class="master"><strong>2024.09 - 2024.12</strong></p>
+                        <p class="course">重构企业官网,优化SEO和页面性能,提升网站访问速度40%。</p>
+                    </div>
+            </div>
+            <div class="main-right-container">
+                <form id="contact-form">
+                    <p class="title"><strong>联系我</strong></p>
+                    <div class="name">
+                        <label for="id-name" class="required">姓名</label>
+                        <input id="id-name" type="text" placeholder="请输入您的姓名" required>
+                        <div class="error" id="name-error">请输入有效的姓名</div>
+                    </div>
+                    <div class="email">
+                        <label for="id-email" class="required">邮箱</label>
+                        <input id="id-email" type="email" placeholder="example@domain.com" required>
+                        <div class="error" id="email-error">请输入有效电子邮件</div>
+                    </div>
+                    <div class="phone">
+                        <label for="id-phone">联系电话</label>
+                        <input id="id-phone" type="tel" placeholder="138-8888-8888" required>
+                        <div class="error" id="phone-error">请输入有效的联系电话</div>
+                    </div>
+                    <div class="subject">
+                        <label for="id-subject" class="required">主题</label>
+                        <select id="id-subject" class="subject" required>
+                            <option value="">请选择主题</option>
+                            <option value="1">工作机会</option>
+                            <option value="2">项目合作</option>
+                            <option value="3">技术咨询</option>
+                            <option value="4">其他</option>
+                        </select>
+                    </div>
+                    <div class="message">
+                        <label for="id-message" class="required">留言内容</label>
+                        <textarea id="id-message" placeholder="请输入您的留言内容..." required maxlength="500"></textarea>
+                        <p class="message-length">0/500</p>
+                        <div class="error" id="message-error">留言内容不能为空</div>
+                    </div>
+                    <button type="submit" class="button">提交</button>
+                </form>
+            </div>
+
+    </div>
+    <!-- 这里必须放在container最后面,不然因为flex设置横向排,footer会排到右边 -->
+    <footer class="footer">
+        <p>
+            © 2025 张三 - 前端开发工程师简历 | 本页面符合W3C标准
+        </p>
+    </footer>
+</body>
+</html>
+</html>

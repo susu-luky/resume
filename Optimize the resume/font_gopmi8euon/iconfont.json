@@ -1,0 +1,23 @@
+{
+  "id": "",
+  "name": "",
+  "font_family": "iconfont",
+  "css_prefix_text": "icon-",
+  "description": "",
+  "glyphs": [
+    {
+      "icon_id": "15802158",
+      "name": "人",
+      "font_class": "ren",
+      "unicode": "e60e",
+      "unicode_decimal": 58894
+    },
+    {
+      "icon_id": "38984764",
+      "name": "铲子_shovel-one",
+      "font_class": "chanzi_shovel-one",
+      "unicode": "e75e",
+      "unicode_decimal": 59230
+    }
+  ]
+}

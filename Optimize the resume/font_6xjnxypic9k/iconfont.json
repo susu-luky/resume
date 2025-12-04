@@ -1,0 +1,16 @@
+{
+  "id": "",
+  "name": "",
+  "font_family": "iconfont",
+  "css_prefix_text": "icon-",
+  "description": "",
+  "glyphs": [
+    {
+      "icon_id": "15802158",
+      "name": "人",
+      "font_class": "ren",
+      "unicode": "e60e",
+      "unicode_decimal": 58894
+    }
+  ]
+}

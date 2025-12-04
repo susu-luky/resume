@@ -1,0 +1,202 @@
+/*基础重置*/
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+}
+.container {
+    max-width: 1000px;
+    margin: 0 auto;
+    background:white;
+    border-radius: 8px;
+    box-shadow: 0 0 20px rgba(0,0,0,0.1);
+    overflow: hidden;  /*元素内部的内容如果超出了元素自身的宽 / 高范围，超出的部分会被直接隐藏.*/
+}
+header{
+    display:flex;
+    background-color:cornflowerblue;
+    width:100%;
+    /* border-radius:10px; */
+    flex-direction:column;
+    align-items:center;
+    gap:30px;
+}
+.iconfont.icon-ren{
+    width:120px;
+    height:120px;
+    font-size:70px;
+    border-radius:50%;
+    border:10px solid rgb(255, 255, 255);
+    background-color:rgb(255,255,255);
+    color:blueviolet;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    margin-right:30px;
+}
+.header-left{
+    display:flex;
+    margin-top:20px;
+}
+.header-right{
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    padding-bottom:30px;
+}
+.header-right p{
+    margin:0;
+   margin-right:30px;
+}
+.header-left-content{
+    display:flex;
+    align-items:center;
+    flex-direction:column;/*设置h1，h2垂直排列*/
+    align-items:center;
+    gap:15px;/*设置间距*/
+}
+.header-left-content h1,h2{
+    align-items:center;
+    margin:0;/*因为h1,h2是块级元素，如果不清楚浏览器默认上下外边距，就算变成弹性元素，纵向排列之间会有默认间距*/
+}
+.main-content{
+    width:600px;
+    background-color:rgb(255, 255, 255);
+
+}
+.main-container{
+    font-family:'Segoe UI', Arial, sans-serif;
+    width:100%;
+    display:flex;
+    padding-left:50px;
+}
+.main-left-container{
+    flex:3;
+    padding-right:30px;
+    border-right:1px solid #eee;
+}
+.main-right-container{
+    flex:2;
+}
+.edu-background{
+    margin-top:30px;
+    border-bottom:2px solid hsla(208, 90%, 44%, 0.662);
+    padding-bottom:10px;
+    color:rgb(2, 60, 110);
+}
+.college{
+    margin-top:15px;
+    margin-bottom:10px;
+}
+.master{
+    margin-bottom:10px;
+    color:rgb(91, 91, 98);
+}
+.course{
+    margin-bottom:20px;
+}
+.blank{
+    margin-top:20px;
+}
+.skill{
+    display:inline-block;
+    background: #eef5ff;
+    padding: 8px 15px;
+    margin: 0 10px 10px 0;
+    border-radius: 20px;
+}
+#contact-form{
+    display:flex;
+    flex-direction:column;
+    align-items:center;
+    justify-content:center;
+    gap:30px;
+}
+.main-right-container{
+    margin:50px;
+    border:1px solid #eee;
+    background-color:#eee;
+}
+.title{
+    font-size:30px;
+    padding-top:20px;
+    padding-bottom:20px;
+    color: rgb(2, 60, 110);
+}
+.required::after{
+    content:"*";
+    color:red;
+}
+input:required:invalid{
+    border-color:rgb(223, 95, 95);
+}
+input:required:valid{
+    border-color:rgb(106, 164, 106);
+}
+input,select{
+    width:280px;
+    height:45px;
+    border-radius:8px;
+    border:1px solid #ddd; /*将边框颜色重置，避免颜色叠加*/
+}
+textarea{
+    width:280px;
+    height:120px;
+}
+input:focus,textarea:focus{
+    outline:none;
+    border-color:#1e5799; 
+    box-shadow: 0 0 0 2px rgba(30, 87, 153, 0.2);
+}
+.name{
+    display:flex;
+    flex-direction:column;
+}
+.email{
+    display:flex;
+    flex-direction:column;
+}
+.phone{
+    display:flex;
+    flex-direction:column;
+}
+.subject{
+    display:flex;
+    flex-direction:column;
+}
+.message{
+    display:flex;
+    flex-direction:column;
+}
+.message-length{
+    font-size:13px;
+    margin-left:auto;   /*让文字靠右*/
+}
+.error{
+    color:rgb(223, 95, 95);
+    font-size:13px;
+}
+select{
+    padding:15px 0;
+}
+label{
+    margin-bottom:10px;
+}
+.button{
+    width:250px;
+    height:45px;
+    color:aliceblue;
+    background-color:rgb(66, 96, 153);
+    border-radius:8px;
+    border:1px solid #ddd;
+}
+.footer{
+    /*注意：这里是给footer加flex，不是给body加，因为我们是让footer里面的子元素p居中（flex只对直接子元素生效）*/
+    display:flex;
+    width:100%;
+    height:70px;
+    color:#eee;
+    align-items:center;
+    background-color:rgb(52, 64, 93);
+    justify-content:center;
+}
