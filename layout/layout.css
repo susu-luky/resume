@@ -1,0 +1,325 @@
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+}
+body{
+    display:flex;
+    flex-direction:column;
+    align-items:center;
+    justify-content:center;
+    background:linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+}
+header{
+    display:flex;
+    width:90%;
+    align-items:center;
+    justify-content:center;
+}
+.header-container{
+    margin-top:20px;
+    width:100%;
+    padding-top:40px;
+    padding-bottom:40px;
+    display:flex;
+    flex-direction:column;
+    align-items:center;
+    justify-content:center;
+    gap:20px;
+    background-color:rgb(44, 62, 80);
+    color:rgba(237, 243, 237, 0.995);
+    border-radius:8px;
+}
+.header-content{
+    display:flex;
+    gap:30px;
+}
+.header-content a{
+    text-decoration:none;  /*删除下划线*/
+    color:white;
+}
+.header-content a{
+    display:flex;
+    align-items:center;
+    justify-content:center;
+}
+.radius{
+    height:40px;
+    width:90px;
+    border-radius:20px;
+    background-color:rgb(156, 191, 205,0.5);
+}
+main{
+    width:90%;
+    flex-direction:column;
+    display:flex;
+    justify-content:center;
+}
+.layout-item h1{
+    border-bottom:3px solid rgb(110, 177, 239);
+    margin-top:30px;
+    margin-bottom:20px;
+    padding-bottom:20px;/*注意这里h1的容器layout-item被设置为弹性元素，如果居中，那么h1也居中了，因为h1容器大小和文字差不多*/
+}
+.layout-item h1::before{
+    content:"◼️";
+    margin-right:10px;
+    font-size:2rem;
+}
+.grid-items{
+    display:grid;
+    grid-template-columns:repeat(4,1fr);
+    grid-template-rows:200px 150px 180px;
+    gap:20px;  /*注意这里间隔只是网格之间，和边框并没有*/
+}
+.items{
+    text-align:center;
+    border-radius:8px;
+    display:flex;
+    flex-direction:column;
+    align-items:center;
+    justify-content:center;
+    gap:20px;
+}
+.items:hover{
+    transform:translateY(-3px);
+    box-shadow:-2px 0 10px #ddd;
+}
+
+.number{
+    font-size:3em;
+}
+.item1{
+    background:linear-gradient(135deg,#a1c4fd 0%,#c2e9fb 100%);
+    grid-row:1;
+    grid-column:1/3;
+}
+.item2{
+    background:linear-gradient(135deg, #ffecd2 0%, #fcb69f 100%);
+    grid-row:1;
+    grid-column:3/5;
+}
+.item3{
+    background:linear-gradient(135deg, #84fab0 0%, #8fd3f4 100%);
+    grid-row:2/4;
+    grid-column:1;
+}
+.item4{
+    background:linear-gradient(135deg, #d4fc79 0%, #96e6a1 100%);
+    grid-row:2;
+    grid-column:2/4;
+}
+.item5{
+    background:linear-gradient(135deg, #a6c0fe 0%, #f68084 100%);
+    grid-row:2;
+    grid-column:4;
+}
+.item6{
+    background:linear-gradient(135deg,#f68084 100%, #a6c0fe 0%);
+    grid-row:3;
+    grid-column:2;
+}
+.item7{
+    background:linear-gradient(135deg, #5ee7df 0%, #b490ca 100%);
+    grid-row:3;
+    grid-column:3/5;
+}
+.flex-items{
+    display:flex;
+    align-items:stretch;
+    /*让 Flex 容器的所有子元素，在交叉轴方向上自动拉伸，填满容器的交叉轴空间；
+    如果子元素没设交叉轴方向的固定尺寸（比如高度），则拉伸到「和容器 / 最高子元素一致」。*/
+    justify-content:center;
+    gap:20px;
+    flex-wrap:wrap;
+    /*这里设置自动换行很重要*/
+}
+.flex-item-container{
+    flex:1 1 22%;
+    /*响应式布局
+    这里设置22%是因为有边框，另外第二行2个元素不是22%，因为flex设置了换行和缩放
+    第二行元素会自动分配空间*/
+    min-width:280px;
+    /*设置元素最小宽度，如果小于此宽度，第一行可能变为1个或2个元素*/
+    display:flex;
+    align-items:flex-start;
+    justify-content:center;
+    padding:30px;
+    border-radius:8px;
+    background-color:rgba(175, 178, 213, 0.425);
+    color:rgba(5, 4, 5, 0.995);
+    gap:20px;
+}
+.flex-item{
+    display:flex;
+    flex-direction:column;
+    align-items:flex-start;
+    justify-content:center;
+    gap:20px;
+    flex:1;
+}
+.icon-circle{
+    width:50px;
+    height:50px;
+    border-radius:50%;
+    background:#a6c0fe;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+}
+.flex-item-container:hover{
+    transform:translateY(-3px);
+    box-shadow:3px 3px 5px rgba(0,0,0,0.3);
+}
+.flex-item1-container{
+    /*为什么要把这个自定义元素加到这，因为使用时就近往父元素找*/
+    --icon-content:"↔︎";
+    /*局部定义.flex-item1 { --icon-content: "↔"; }	仅当前选择器（.flex-item1）及其子元素可用*/
+    /*全局定义:root { --circle-color: #3498db; }	整个页面所有元素可用*/
+}
+.flex-item2-container{
+    --icon-content:"↕︎";
+}
+.flex-item3-container{
+    --icon-content:"↩";
+}
+.flex-item4-container{
+    --icon-content:"⇆";
+}
+.flex-item5-container{
+    --icon-content:"↪";
+}
+.flex-item6-container{
+    --icon-content:"⇅";
+}
+.icon-circle::before{
+    /*
+    1.::before不是在容器外面的前面加，而是在容器内部最前面
+    2.学会使用var(--icon-content)自定义属性和var很方便
+    */
+    content:var(--icon-content);
+}
+.position-items{
+    background:linear-gradient(135deg,#6a11cb 0%, #2575fc 100%);
+    border-radius:8px;
+}
+.position-item{
+    display:flex;
+    flex-direction:column;
+    align-items:flex-start;
+    justify-content:center;
+}
+.position-title::before{
+    content:"◆";
+    color:#a1c4fd;
+    font-size:1.2em;
+    margin-right:5px;
+}
+.position-items{
+    position:relative;
+    width:100%;
+    height:500px;
+}
+.position-item{
+    border-radius:8px;
+    background-color:white;
+    padding:20px;
+    
+}
+.absolute-item1{
+    position:absolute;
+    top:50px;
+    left:50px;
+    height:150px;
+    width:250px;
+}
+.fixed-item{
+    position:fixed;
+    top:600px;
+    left:100px;
+    width:250px;
+    height:120px;
+}
+.relative-item1{
+    position:relative;
+    top:90px;
+    left:800px;
+    width:250px;
+    height:150px;
+}
+.absolute-item2{
+    position:absolute;
+    top:170px;
+    left:730px;
+    width:250px;
+    height:150px;
+}
+.position-item:hover{
+    transform:scale(1.1);
+    box-shadow:0 4px 8px rgba(0,0,0,0.3);
+    /*未悬停时，所有框的 z-index 相同，按 DOM 顺序堆叠（后定义的框在上面）；
+    鼠标悬停某一个框时，它的 z-index 变为 10（最高），自动置顶*/
+    z-index: 10;
+}
+.sticky-item{
+    display:flex;
+    flex-direction:column;
+    align-items:flex-start;
+    justify-content:center;
+    gap:20px;
+    position:sticky;
+    top:20px;
+    background-color:white;
+    padding:20px;
+    border-radius:8px;
+    border-left:5px solid red;
+}
+.sticky-item h3::before{
+    content:"📌";
+}
+.sticky-item:hover{
+    transform:translateX(5px);
+    box-shadow:0 4px 8px rgba(0,0,0,0.3);
+    transition:transform 0.3s ease;
+}
+.columns-items{
+    columns:3 300px;         /*列数3，最小列宽300px*/
+    column-gap:20px;         
+}
+.column-item{
+    background-color:white;
+    break-inside: avoid;
+    margin-bottom: 30px; 
+    border-radius:8px;
+    padding:30px;
+}
+hr{
+    margin:20px 0;
+}
+.column-item:hover{
+    transform:translateY(-3px);
+    box-shadow:0 3px 5px #9b9a9a;
+    transition:transform 0.3s ease;
+}
+footer{
+    display:flex;
+    flex-direction:column;
+    align-items:center;
+    justify-content:center;
+    gap:20px;
+    color:white;
+    width:90%;
+    padding:30px;
+    background-color:black;
+    border-radius:8px;
+}
+.footer-links{
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    gap:20px;
+}
+
+
+
+
