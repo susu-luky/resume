@@ -1,0 +1,23 @@
+{
+  "id": "",
+  "name": "",
+  "font_family": "iconfont",
+  "css_prefix_text": "icon-",
+  "description": "",
+  "glyphs": [
+    {
+      "icon_id": "1049756",
+      "name": "star",
+      "font_class": "star",
+      "unicode": "e63f",
+      "unicode_decimal": 58943
+    },
+    {
+      "icon_id": "1524962",
+      "name": "手提包",
+      "font_class": "shoutibao",
+      "unicode": "e502",
+      "unicode_decimal": 58626
+    }
+  ]
+}

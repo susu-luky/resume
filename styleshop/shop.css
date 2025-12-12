@@ -1,0 +1,584 @@
+*{
+    padding:0;
+    margin:0;
+    box-sizing:border-box;
+}
+body{
+    background-color:#ddd;
+    width:100vw;
+    /*注意：以后在写的时候，宽和高都要写*/
+    min-height:100vh;
+    /*如果 body 没有设置 min-height: 100vh;，它的高度将只由内容撑开。
+    在某些情况下，特别是当你将轮播图中的项目设置为 position: absolute; 
+    且没有给父容器 .page-show-container 设置足够高度时，
+    浏览器可能无法正确计算内容高度。
+    但是，更直接的原因很可能是 Flex 容器导致 main 的尺寸计算出现问题，
+    尤其是当 main 内部是绝对定位的元素时。*/
+    /*不能设置垂直居中，因为现在高度是视口高度 header 和 main 作为一个整体被推到屏幕中央，顶部有大量空白。*/
+ 
+}
+main{
+    display:flex;
+    max-width:1400px;
+    flex-direction:column;
+    justify-content:center;
+    align-items:center;
+    /*此时不要用flex布局来居中，因为body里面的header和main一个宽度占满
+    一个只占1400px,有绝对定位和相对定位不要用flex*/
+    margin: 0 auto;
+}
+section{
+    /*如果大小继承父类，那么每一个中间子类都要继承*/
+    width:100%;
+}
+
+header{
+    display:flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 20px 100px;
+    background-color:white;
+    position:sticky;
+    top:0;
+    gap:20px;
+    width:100%;
+    /*这里很重要
+    想象一下你的网页是一叠纸：
+    Header (导航栏) 是第一张纸。
+    Dropdown (下拉框) 是贴在导航栏这张纸上的一张便利贴。
+    Main (轮播图等) 是铺在导航栏后面的第二张纸。
+    但是，因为轮播图使用了动画（transform），浏览器会把它视为“特殊处理”的纸张，
+    有时会把它提到比没有设置 z-index 的便利贴更高的位置。
+    加上 z-index: 999 就像是告诉浏览器：“不管后面有什么，
+    这张便利贴（下拉框）必须放在最最最顶层，离用户的眼睛最近。*/
+    z-index: 999;
+}
+.header-nav{
+    display:flex;
+    align-items: center;
+    gap:50px;
+}
+.header-user{
+    display:flex;
+    align-items: center;
+    gap:30px;
+}
+.header-nav-item{
+    display:flex;
+    align-items: center;
+    gap:5px;
+}
+.header-user-item{
+    display:flex;
+    flex-direction:column;
+    justify-content:center;
+}
+.header-title{
+    font-weight:bolder;
+    font-family:Sans-Serif;
+    font-size:30px;
+    color:rgb(238, 102, 125);
+}
+.iconfont.icon-shoutibao{
+    font-size:45px;
+    color:rgb(238, 102, 125);
+}
+.header-nav a{
+    text-decoration:none;
+    color:black;
+}
+.header-search-input{
+    width:300px;
+    height:30px;
+    background-color:#f6f5f5;
+    border-radius:8px;
+    padding:20px;
+    border:2px solid white;/*重置外边框颜色*/
+    border-color:#ddd;
+}
+.header-search-input:focus{
+    outline:none;/*浏览器默认设置聚焦外轮廓*/
+    border-color:rgb(238, 102, 125);
+}
+.iconfont.icon-0-29{
+    font-size:35px;
+    color:#5e5c5c;
+}
+.iconfont.icon-aixin{
+    font-size:25px;
+    padding-top:5px;
+    color:#5e5c5c;
+}
+.iconfont.icon-gouwuche2{
+    font-size:23px;
+    color:#0e0e0e;
+    padding-top:4px;
+}
+.header-user-link{
+    text-decoration:none;
+    color:black;
+    font-size:13px;
+}
+.link1{
+    padding-left:5px;
+}
+.link2{
+    padding-top:3px;
+}
+.link3{
+    padding-top:7px;
+}
+/*实现鼠标在容器上就能把图标和文字都变为粉色*/
+.header-user-item:hover a,
+.header-user-item:hover div{
+    color:rgb(238, 102, 125);
+}
+.page-show-container{
+    width:100%;
+    height:500px;
+    overflow:hidden;
+}
+.page-show-item{
+    width:100%;
+    height:100%;
+    color:white;
+    display:flex;
+    flex-direction:column;
+    justify-content:center;
+    align-items:flex-start;
+    background:linear-gradient(135deg,rgb(34, 34, 34) 0%, rgba(53, 53, 53, 0.3) 100%);
+    border-radius:8px;
+    margin-top:20px;
+}
+.slider-track{
+    display:flex;
+    width:300%;
+    height:100%;
+    animation:slider-slide 24s infinite;
+    animation-timing-function: ease;/*使滑动更加平滑*/
+}
+.page-show{
+    flex:0 0 33.33%;  /*不放缩，并且占33.33%*/
+    width:33.33%;    /*防止浏览器不兼容*/
+    height:100%;
+}
+
+/* 轮播项内容样式调整 */
+.page-show-item{
+    width:100%; 
+    height:100%;
+    color:white;
+    display:flex;
+    flex-direction:column;
+    justify-content:center;
+    padding-left: 10%;
+    align-items:flex-start;
+    background:linear-gradient(135deg,rgb(71, 68, 68) 0%, rgba(113, 112, 112, 0.3) 100%);
+    border-radius:8px;
+    /* 移除 margin-top: 20px; 如果你想让内容紧贴顶部 */
+}
+/* 5. 定义滑动动画 */
+@keyframes slider-slide{
+    0%{
+        transform:translateX(0);
+    }
+    /* 30% (2.7s): 图 1 持续显示，开始滑动 
+    这里其实是帧停留时间2.7s*/
+    30%{
+        transform:translateX(0);
+    }
+     /* 33.33% (3s): 滑动完成，显示图 2 
+    这里是帧切换时间0.3s*/
+    33.33%{
+        transform:translateX(-33.333%);
+    }
+    63.33%{
+        transform:translateX(-33.333%);
+    }
+    66.66%{
+        transform:translateX(-66.666%);
+    }
+    96.66% { 
+        transform: translateX(-66.666%); 
+    } 
+    /* 99.99% (8.99s): 保持位置不变，准备循环 */
+    97% { 
+        transform: translateX(-66.666%); 
+    } 
+    /* 100% (9s): 💥 瞬时归位到 0%，由于动画结束，这个跳跃会瞬间发生 */
+    100% { 
+        transform: translateX(0); 
+    } 
+}
+.page-show-title
+{
+    font-size:50px;
+    padding-bottom:30px;
+}
+.page-show-desc{
+    font-size:20px;
+    padding-bottom:30px;
+}
+.page-show-btn{
+    font-size:18px;
+    width:120px;
+    height:50px;
+    border-radius:30px;
+    color:white;
+    background-color:#ff3f6c;
+    border:none;
+}
+.hot-sale-desc{
+    display:grid;
+    grid-template-columns:repeat(4,1fr);
+    grid-template-rows:300px;
+    gap:20px;
+}
+.hot-sale-item1{
+    /*注意这里路径里面有空格和'要给路径加双引号*/
+    background-image:url("image/hot-sale-women's wear.png");
+    background-size:cover;
+}
+.hot-sale-item2{
+    /*注意这里路径里面有空格和'要给路径加双引号*/
+    background-image:url("image/hot-sale-men's wear.png");
+    background-size:cover;
+    /*图片居中显示*/
+    background-position: center;
+}
+.hot-sale-item3{
+    /*注意这里路径里面有空格和'要给路径加双引号*/
+    background-image:url("image/hot-sale-boots.png");
+    background-size:cover;
+}
+.hot-sale-item4{
+    /*注意这里路径里面有空格和'要给路径加双引号*/
+    background-image:url("image/hot-sale-ACC.png");
+    background-size:cover;
+    background-position: center;
+}
+
+.hot-sale-item-title{
+    font-size:30px;
+    color:white;
+    font-weight:bolder;
+    padding:10px;
+}
+.hot-sale-item{
+    display:flex;
+    justify-content:center;
+    align-items:center;
+}
+.hot-sale-title{
+    display:flex;
+    justify-content:center;
+    align-items:center;
+}
+.hot-sale-title-text{
+    margin-top:50px;
+    font-size:30px;
+    margin-bottom:40px;
+    position:relative;
+}
+.hot-sale-title-text::after{
+    content:"";
+    position:absolute;
+    /*先让元素左边定位到h2中间*/
+    left:50%;
+    /*这里要用calc()函数，因为这里是相对于h2元素顶部来考虑的
+    注意：calc函数里面运算符左右必须加空格*/
+    /* top:calc(100%+30px); */
+    /*这里底部是距离h2的底部，如果为正数就在h2里面，为负数就在h2外面*/
+    bottom:-30px;
+    width:80px;
+    height:3px;
+    background-color: #ff3f6c;
+    /*再让元素移动到相对于自己宽度的一半，就实现居中了*/
+    transform:translateX(-50%);
+}
+.promote-container{
+    display:flex;
+    flex-direction:column;
+    justify-content:center;
+    align-items:flex-start;
+    width:100%;
+    height:300px;
+    margin-top:50px;
+    padding-left:50px;
+    border-radius:8px;
+    background:linear-gradient(135deg, #6a11cb 0%, #2575fc 100%);
+}
+.promote-title{
+    font-size:40px;
+    color:white;
+}
+.promote-desc{
+    font-size:20px;
+    color:white;
+    margin-top:20px;
+}
+.time-container{
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    margin-top:20px;
+    gap:20px;
+}
+.time-item{
+    width:70px;
+    height:100px;
+    background-color:rgba(255,255,255,0.2);
+    display:flex;
+    flex-direction:column;
+    justify-content:center;
+    align-items:center;
+    border-radius:8px;
+    color:white;
+}
+.recommend-container{
+    display:flex;
+    flex-direction:column;
+    justify-content:center;
+    align-items:center;
+}
+.recommend-items{  
+    /*这里必须要写宽度*/
+    width:100%;
+    display:grid;
+    grid-template-columns:repeat(4,1fr);
+    grid-template-rows:450px;
+    gap:20px;
+    margin-top:30px;
+}
+.recommend-item{
+    display:flex;
+    flex-direction:column;
+    justify-content:center;
+    align-items:flex-start;
+    padding-left:20px;
+    background-color:white;
+    border-radius:8px;
+}
+.recommend-item-title{
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    width:50px;
+    height:30px;
+    border-radius:20px;
+    background-color:#ff3f6c;
+    color:white;
+    margin-top:20px;
+}
+.recommend-image{
+    width:250px;
+    height:250px;
+    background-size:cover;
+    margin:20px auto;
+    
+}
+.recommend-item{
+    position:relative;
+    /*transition 是定义 “状态变化时的动画规则”，而不是 “触发动画”—— 它需要提前声明在「初始状态」上，
+    才能监听 “初始→hover” 和 “hover→初始” 两个方向的变化。*/
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+.recommend-item:hover{
+    transform:translateY(-8px);
+    box-shadow:0 3px 5px #beb9b9;
+}
+.recommend-image-btn{
+    position:absolute;
+    bottom:-20px;
+    /*绝对定位的元素默认宽度是 “包裹内容” 的,它的宽度只够容纳三个图标，相当于 “容器和内容一样宽”，
+    这时候 justify-content: center 自然看不出居中效果，给 .recommend-image-btn 
+    加 left: 0; right: 0;，让它占满父容器的宽度，*/
+    /* left:50%;
+    transform:translateX(-50%);
+    同样可以达到居中效果*/
+    left:0;
+    right:0;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    gap:10px;
+    opacity:0;
+    /*上面透明度为0，但是里面的按钮还是能点击的，visibility是将所有与用户交互的东西都失效*/
+    visibility:hidden;
+    /*transition过渡 all(包括opacity和visibility,top)*/
+    transition:all 0.3s;
+}
+.recommend-item:hover .recommend-image-btn{
+    bottom:30px;
+    opacity:1;
+    visibility:visible;
+}
+.recommend-image1{
+    background-image:url("image/T-shirt.png");
+}
+.recommend-image2{
+    background-image:url("image/sneaker.png");
+}
+.recommend-image3{
+    background-image:url("image/sun protective clothing.png");
+}
+.recommend-image4{
+    background-image:url("image/ring.png");
+}
+.recommend-item-decs{
+    margin-bottom:10px;
+}
+.recommend-item-price{
+    color:#ff3f6c;
+}
+.recommend-item-price-container{
+    display:flex;
+    justify-content:center;
+    align-items:flex-start;
+    gap:10px;
+    margin-bottom:10px;
+}
+.recommend-item-rating-stars{
+    display:flex;
+    justify-content:flex-start;
+    align-items:center;
+    gap:2px;
+}
+.recommend-item-rating{
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    /*注意这里必须写上宽度，文字才能两端对齐*/
+    width:100%;
+}
+.brand-container{
+    display:flex;
+    flex-direction:column;
+    justify-content:center;
+    align-items:center;
+    width:100%;
+}
+.brand-item-container{
+    width:100%;
+    display:grid;
+    grid-template-columns:repeat(6,1fr);
+    grid-template-rows:150px;
+    gap:10px;
+    margin-top:30px;
+}
+.brand-item{
+    color:#4b4848;
+    background-color:white;
+    font-size:40px;
+    font-family:'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    border-radius:8px;
+    border:1px solid #beb9b9;
+}
+.brand-item:hover{
+    transform:translate(5px,5px);
+    box-shadow:3px 3px 5px #beb9b9;
+}
+.footer-container{
+    width:100%;
+    height:350px;
+    background-color:#3b3b3e;
+    display:flex;
+    flex-direction:column;
+    justify-content:center;
+    align-items:center;
+}
+.footer-item-container{
+    width:100%;
+    display:grid;
+    grid-template-columns:repeat(4,1fr);
+    grid-template-rows:180px;
+    padding-top:50px;
+    /*grid 中当列宽是 1fr 时，列会自动填满容器，justify-content 无法产生间距。
+    justify-content:space-around;无效*/
+    padding-left:100px;
+    border-bottom:1px solid #a2a1a1;
+    padding-bottom:50px;
+}
+footer{
+    margin-top:50px;
+}
+.footer-item-title{
+    color:white;
+    margin-bottom:20px;
+    position:relative;
+    display: inline-block; 
+}
+.footer-item-title::after{
+    position:absolute;
+    bottom:-10px;
+    left:50%;
+    transform:translateX(-50%);
+    content:"";
+    width:30px;
+    height:3px;
+    border-radius:2px;
+    background-color:#ff3f6c;
+    margin-top:10px;
+}
+.header-nav-select
+{
+    /*
+    这里下拉框是透明的，是因为header层级不够高，没有覆盖在轮播图上面。
+    为什么只改下拉框没用？
+    这就好比：
+    轮播图 是一张铺在桌子上的地毯。
+    Header 是一个放在地毯下面的盒子。
+    下拉框 是盒子里的一根很高很高的柱子（z-index: 999）。
+    不管这根柱子有多高，只要盒子（Header）还在地毯（轮播图）下面，柱子就穿不透地毯。
+    你必须先把盒子拿到地毯上面来（给 Header 加 z-index）。
+    */
+    height:200px;
+    width:200px;
+    background-color:#ffffff !important;
+    color:#7c7878;
+    font-weight:400;
+    display:flex;
+    flex-direction:column;
+    justify-content:center;
+    align-items:flex-start;
+    gap:10px;
+    opacity:0;
+    visibility:hidden;
+    position:absolute;
+    top:calc(100% + 20px);
+    left:0;
+    transition:all 0.3s;
+    border-radius:8px;
+}
+.header-nav-select li{
+    list-style-type:none;
+}
+.header-nav-item{
+    position:relative;
+    /*<a> 标签（行内元素），position: relative 对行内元素的定位支持不完整*/
+}
+.header-nav-item:hover{
+    color:#ff3f6c;
+    border-bottom:3px solid #ff3f6c;
+}
+.header-nav-item:hover .header-nav-select{
+    opacity:1;
+    visibility:visible;
+}
+.footer-item-list{
+    list-style-type:none;
+    color:rgb(188, 183, 183);
+}
+.footer-item-list li{
+    margin-bottom:10px;
+}
+.footer-hr{
+    color:white;
+}
+.footer-copyright{
+    color:rgb(200, 197, 197);
+    padding-top:20px;
+}
