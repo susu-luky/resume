@@ -1,0 +1,133 @@
+*{
+    margin:0;
+    padding:0;
+    /* 让元素的 width 和 height 包含 padding 和 border */
+    box-sizing:border-box;
+}
+body{
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    /* body是块级元素，块级元素默认宽度是100% */
+    /* 不设置min-height:100vh的话，flex 居中会失效
+    body 是块级元素，默认宽度 100%，但默认高度是 “包裹内容”（即内容多高，body 就多高）。比如你 body 里只有一行文字，默认情况下 body 的高度可能只有 20px，此时：
+    justify-content: center（水平居中）：因为宽度 100%，文字会水平居中；
+    align-items: center（垂直居中）：body 自身高度只有 20px，“垂直居中” 就失去了意义 —— 文字本来就在这 20px 的垂直中间，视觉上根本不是 “整个页面居中”。 */
+    min-height:100vh;
+    /* 整个视口的背景颜色 */
+    background:#f8fafc;
+    /* 文字颜色,color:#39475b;*/
+    padding:20px;
+}
+.calculator-container{
+    /* 注意：这里width:100%是对于小屏来说适配屏幕最大宽度，但对于大屏
+    来说宽度就是380px */
+    width:100%;
+    max-width:380px;
+    background: #fafbfc;
+    border-radius:16px;
+    /* box-shadow: 水平偏移(右为正) 垂直偏移(下为正) 模糊半径(0是完全不模糊) 扩散半径 颜色 [inset]; */
+    box-shadow:0 20px 40px rgba(0, 0, 0, 0.08), 0 0 0 1px rgba(0, 0, 0, 0.02);
+}
+.header{
+    background:#2e5985;
+    color:aliceblue;
+    border-radius:16px;
+    height:80px;
+    display:flex;
+    /* justify-content主轴默认是横着的 */
+    justify-content:center;
+    align-items:center;
+}
+.display{
+    background:#ffffff;
+    height:160px;
+    width:100%;
+    padding:24px;
+    /* 主轴方向决定了元素排列方式 */
+    display:flex;
+    flex-direction:column;
+    align-items:flex-end;
+    justify-content:flex-end;
+    /* 这里的底部边框1px是包含在140px里面的（取决于有没有box-sizing） */
+    border-bottom:1px solid #f1f3f4;
+}
+#expression{
+    /* 这里rem是相对于根元素<html> 的字体大小主流浏览器给 <html> 的默认 font-size 是 16px */
+    font-size:1.4rem;
+    margin-bottom:8px;
+    color: #718096;
+}
+#result{
+    /* 这里不能设置width:100%这样子元素在父元素里占100%占满宽度，元素不会在右边，会从左边开头显示 */
+    font-size:3.2rem;
+    color:#000000;
+    /* 当元素内部的内容的尺寸超过容器自身的宽 / 高时，超出容器边界的部分会被直接隐藏。 */
+    overflow:hidden;
+    /* 当单行文本的宽度超过容器的宽度时，超出容器的文本会被隐藏，
+    并用省略号 ... 表示 “还有未显示的内容”（省略号会显示在容器的末尾）。 */
+    text-overflow:ellipsis;
+    /* 注意：text-overflow: ellipsis; 不能单独使用，必须搭配另外两个属性
+    1.white-space: nowrap;：强制文本单行显示（不换行），这是触发文本溢出的前提；
+    2.overflow: hidden;：隐藏超出容器的文本（如果不隐藏，溢出文本会直接显示在容器外）；
+    3.text-overflow: ellipsis;：用省略号替代溢出的文本。 */
+    white-space:nowrap;
+}
+.keys{
+    display:grid;
+    padding:24px;
+    background:#fafbfc;
+    grid-template-columns:repeat(4, 1fr);
+    gap:12px;
+}
+button{
+    height:64px;
+    font-size:1.4rem;
+    /* 光标从箭头变成手掌 */
+    cursor:pointer;
+    /* 所有样式变化都在0.2秒内，平滑转变 */
+    transition:all 0.2s;
+    font-weight:500;
+    border-radius:16px;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    /* button有默认黑色边框 */
+    border:none;
+}
+button:hover{
+    transform: translateY(-2px) scale(1.02);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+button:active{
+    transform: translateY(0) scale(0.98);
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+}
+button:nth-child(1){
+    background:#f56565;
+    color: white;
+    font-weight: 600;
+}
+button:nth-child(17){
+    grid-column:1/3;
+}
+button:nth-child(2),button:nth-child(3),button:nth-child(18),button:nth-child(19){
+    background: #f3f4f6;
+    color: #4b5563;
+    border: 1px solid #e5e7eb;
+}
+button:nth-child(4),button:nth-child(8),button:nth-child(12),button:nth-child(16){
+    background: #6b93a7;
+    color: white;
+    font-size: 1.5rem;
+}
+button:nth-child(20){
+    grid-column:1/5;
+    color:white;
+    font-size:1.6rem;
+    /* #292b2a 0% 和 #8bb3cb 100% 里的百分比，是给渐变颜色 “标位置”：
+       0%：表示 #292b2a 这个颜色，出现在渐变方向的起点位置（to top right 的起点是左下角）；
+       100%：表示 #8bb3cb 这个颜色，出现在渐变方向的终点位置（to top right 的终点是右上角）；
+       两个位置之间的区域，就是两种颜色 “平滑过渡的渐变区”—— 而不是 “某个颜色占 100%”。 */
+    background:linear-gradient(135deg, #292b2a 0%, #8bb3cb 100%);
+}

@@ -68,7 +68,9 @@ main{
 }
 .grid-items{
     display:grid;
+    /* 控制列的宽度，这里是分成四列，每列平均分配宽度（这里的宽度已经减去了间距） */
     grid-template-columns:repeat(4,1fr);
+    /* 控制行的高度，这里第一行200px高，第二行150px,第三行180px */
     grid-template-rows:200px 150px 180px;
     gap:20px;  /*注意这里间隔只是网格之间，和边框并没有*/
 }

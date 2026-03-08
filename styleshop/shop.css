@@ -15,7 +15,6 @@ body{
     但是，更直接的原因很可能是 Flex 容器导致 main 的尺寸计算出现问题，
     尤其是当 main 内部是绝对定位的元素时。*/
     /*不能设置垂直居中，因为现在高度是视口高度 header 和 main 作为一个整体被推到屏幕中央，顶部有大量空白。*/
- 
 }
 main{
     display:flex;
@@ -562,7 +561,7 @@ footer{
 }
 .header-nav-item:hover{
     color:#ff3f6c;
-    border-bottom:3px solid #ff3f6c;
+    
 }
 .header-nav-item:hover .header-nav-select{
     opacity:1;
