@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>图书馆管理系统 DFD 建模</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script type="module">
+        import mermaid from 'https://cdn.jsdelivr.net/npm/mermaid@10/dist/mermaid.esm.min.mjs';
+        mermaid.initialize({ 
+            startOnLoad: true,
+            theme: 'default',
+            flowchart: {
+                useMaxWidth: true,
+                htmlLabels: true,
+                curve: 'basis'
+            }
+        });
+    </script>
+    <style>
+        body { font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; }
+        .mermaid { display: flex; justify-content: center; margin: 2rem 0; }
+    </style>
+</head>
+<body class="bg-gray-50 text-gray-800 p-8">
+
+    <div class="max-w-5xl mx-auto bg-white p-10 rounded-xl shadow-lg">
+        <h1 class="text-3xl font-bold text-center text-green-800 mb-8 border-b pb-4">课堂作业：图书馆管理系统 DFD 建模</h1>
+
+        <!-- 第0层图 -->
+        <section class="mb-16">
+            <h2 class="text-2xl font-semibold text-gray-700 mb-4 flex items-center">
+                <span class="bg-green-600 text-white w-8 h-8 rounded-full flex items-center justify-center mr-3 text-lg">1</span>
+                第 0 层数据流图 (系统核心功能)
+            </h2>
+            <p class="text-gray-600 mb-4">展示系统四大核心功能（图书查询、借书、还书、图书管理）与外部实体、数据存储的交互。</p>
+            
+            <div class="bg-gray-50 border rounded-lg p-4">
+                <div class="mermaid">
+                    flowchart TD
+                        %% 定义外部实体
+                        Reader[外部实体: 读者]:::entity
+                        Admin[外部实体: 管理员]:::entity
+
+                        %% 定义数据存储
+                        D1[(D1: 读者信息表)]:::datastore
+                        D2[(D2: 图书信息表)]:::datastore
+                        D3[(D3: 借阅记录表)]:::datastore
+
+                        %% 定义处理过程
+                        P1((P1: 图书查询)):::process
+                        P2((P2: 借书处理)):::process
+                        P3((P3: 还书处理)):::process
+                        P4((P4: 图书管理)):::process
+
+                        %% 数据流
+                        Reader -->|查询条件| P1
+                        D2 -.->|匹配的图书信息| P1
+                        P1 -->|查询结果| Reader
+
+                        Reader -->|借书请求| P2
+                        D1 -.->|读者状态| P2
+                        D2 -.->|图书状态| P2
+                        P2 -->|更新状态为借出| D2
+                        P2 -->|新增借阅记录| D3
+                        P2 -->|借书成功凭条| Reader
+
+                        Reader -->|还书请求| P3
+                        D3 -.->|原始借阅记录| P3
+                        P3 -->|更新状态为在馆| D2
+                        P3 -->|填写归还时间| D3
+                        P3 -->|还书成功凭条/罚单| Reader
+
+                        Admin -->|编目信息/上下架| P4
+                        P4 -->|新增/修改图书记录| D2
+
+                        %% 样式类定义
+                        classDef entity fill:#f9f9f9,stroke:#333,stroke-width:2px;
+                        classDef process fill:#e1f5fe,stroke:#0288d1,stroke-width:2px;
+                        classDef datastore fill:#fff3e0,stroke:#f57c00,stroke-width:2px;
+                </div>
+            </div>
+        </section>
+
+        <!-- 第1层图 -->
+        <section class="mb-12">
+            <h2 class="text-2xl font-semibold text-gray-700 mb-4 flex items-center">
+                <span class="bg-green-600 text-white w-8 h-8 rounded-full flex items-center justify-center mr-3 text-lg">2</span>
+                第 1 层数据流图 (P2 借书处理 的向下分解)
+            </h2>
+            <p class="text-gray-600 mb-4">将“借书处理”分解为三个子功能：验证读者身份、检查图书状态、登记借阅，以展示内部数据流转。</p>
+            
+            <div class="bg-gray-50 border rounded-lg p-4">
+                <div class="mermaid">
+                    flowchart TD
+                        %% 边界定义
+                        Reader[外部实体: 读者]:::entity
+                        D1[(D1: 读者信息表)]:::datastore
+                        D2[(D2: 图书信息表)]:::datastore
+                        D3[(D3: 借阅记录表)]:::datastore
+
+                        %% 子处理过程
+                        P2_1((P2.1: 验证读者身份)):::process
+                        P2_2((P2.2: 检查图书状态)):::process
+                        P2_3((P2.3: 登记借阅)):::process
+
+                        %% 数据流向
+                        Reader -->|读者证条码| P2_1
+                        D1 -.->|返回读者状态| P2_1
+                        
+                        Reader -->|图书条码| P2_2
+                        D2 -.->|返回图书状态| P2_2
+
+                        P2_1 -->|传递有效读者ID| P2_3
+                        P2_2 -->|传递可借图书ID| P2_3
+
+                        P2_3 -->|写入借阅流水| D3
+                        P2_3 -->|更新状态为借出| D2
+                        P2_3 -->|借书成功凭条| Reader
+
+                        %% 样式类定义
+                        classDef entity fill:#f9f9f9,stroke:#333,stroke-width:2px;
+                        classDef process fill:#e1f5fe,stroke:#0288d1,stroke-width:2px;
+                        classDef datastore fill:#fff3e0,stroke:#f57c00,stroke-width:2px;
+                </div>
+            </div>
+        </section>
+
+        <!-- 一致性检测说明 -->
+        <section class="bg-blue-50 p-6 rounded-lg border border-blue-100">
+            <h3 class="text-xl font-bold text-blue-800 mb-3">✅ 父子图平衡一致性检测结论</h3>
+            <p class="text-blue-900 leading-relaxed">
+                经过比对，<strong>第0层图（父图）</strong>中 <span class="bg-blue-200 px-1 rounded">P2 借书处理</span> 接收来自读者的“借书请求”，并输出“凭条”；涉及读写 D1、D2、D3 三个数据存储。<br><br>
+                在<strong>第1层图（子图）</strong>中，P2.1、P2.2、P2.3 的总体系统边界输入同样为读者的“证件条码和图书条码”，总输出为“借书成功凭条”，且同样只与 D1、D2、D3 发生了对应的读写操作。<br><br>
+                <strong>结论：父图与子图的输入/输出数据流完全一致，满足 DFD 的平衡原则。</strong>
+            </p>
+        </section>
+
+    </div>
+
+</body>
+</html>

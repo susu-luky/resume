@@ -1,12 +1,38 @@
 <!DOCTYPE html>
 <html lang="en">
-    <head>
-        <meta charset="UTF-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <title>DomTest</title>
-        <link rel="stylesheet" href="test.css">
-    </head>
-    <body>
-        <input type="password" id="password">
-    </body>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>待办事项</title>
+    <link rel="stylesheet" href="test.css">
+    <link rel="stylesheet"href="cat/iconfont.css">
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <div class="header-content">
+                <div class="iconfont icon-a-Group46"></div>
+                <h1 class="title">待办事项</h1>
+            </div>
+            <p class="time"></p>
+        </div>
+        <div class="input">
+            <input type="text" id="text1" placeholder="添加新任务">
+            <div class="iconfont icon-a-Group46"></div>
+            <button id="add-btn">添加任务</button>
+        </div>
+        <div class="task">
+            <div class="task-bt">
+                <button class="btns btn-all">全部</button>
+                <button class="btns btn-proceed">进行中</button>
+                <button class="btns btn-complete">已完成</button>
+                <div class="record"></div>
+            </div>
+            <div class="task-list">
+                <ul class="list"></ul>
+            </div>
+        </div>
+    </div>
+    <script src = "test.js"></script>
+</body>
 </html>

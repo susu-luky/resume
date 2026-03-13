@@ -1,0 +1,16 @@
+{
+  "id": "",
+  "name": "",
+  "font_family": "iconfont",
+  "css_prefix_text": "icon-",
+  "description": "",
+  "glyphs": [
+    {
+      "icon_id": "42039129",
+      "name": "橘猫",
+      "font_class": "a-Group46",
+      "unicode": "e632",
+      "unicode_decimal": 58930
+    }
+  ]
+}
